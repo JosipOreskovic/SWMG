@@ -1,0 +1,26 @@
+{
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Star Wars Memory Game");
+	sf::Texture frontTexture, backTexture;
+	if (!frontTexture.loadFromFile("resources/star-wars-img.png", sf::IntRect(435, 415, 105, 105)) ||
+		!backTexture.loadFromFile("resources/card-back.png"))
+		return EXIT_FAILURE;
+	sw::Sprite3d sprite(frontTexture, backTexture);
+	sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width, sprite.getLocalBounds().height) / 2.f);
+	sprite.setPosition(sf::Vector2f(window.getSize() / 2u));
+	sf::Clock clock;
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+		if (clock.getElapsedTime().asSeconds() <= 1) sprite.setRotation({ clock.getElapsedTime().asSeconds() * 0.0f, clock.getElapsedTime().asSeconds() * 0.0f, clock.getElapsedTime().asSeconds() * 0.0f });
+		window.clear();
+		window.draw(sprite);
+		window.display();
+	}
+
+	return EXIT_SUCCESS;
+}

@@ -1,0 +1,33 @@
+
+		sf::Font font;
+		if (!font.loadFromFile("resources/arial.ttf"))
+		{
+			// error...
+		}
+
+		sf::Text text;
+
+		// select the font
+		text.setFont(font); // font is a sf::Font
+
+							// set the string to display
+
+		switch(choice)
+		{
+		case 1: text.setString("Play"); break;
+		case 2: text.setString("Instructions"); break;
+		case 3: text.setString("Quit"); break;
+		default: break;
+		}
+
+		// set the character size
+		text.setCharacterSize(24); // in pixels, not points!
+
+								   // set the color
+		text.setFillColor(sf::Color::Red);
+
+		// set the text style
+		text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+		window->draw(text);
+		// inside the main loop, between window.clear() and window.display()
